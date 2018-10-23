@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= User.find(@revision.user_id).name %>
+</p>
+
+<p>
+  <strong>Page:</strong>
+  <%= Page.find(@revision.page_id).title %>
+</p>
+
+<p>
+  <strong>Contents:</strong>
+  <%= @revision.contents %>
+</p>
+
+<%= link_to 'Back', revisions_path %>
