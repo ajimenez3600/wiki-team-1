@@ -1,6 +1,4 @@
 env:
-  global:
-    - CC_TEST_REPORTER_ID=25b46b0213bdc80d0cccca7d9354513e89f0aa1c249e7d20913c777093055014
 language: ruby
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -14,8 +12,8 @@ after_script:
 after_success:
   - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
-  - ./send.sh success $WEBHOOK_URL
+  - ./send.sh success $DISCORD_WEBHOOK
 after_failure:
   - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
-  - ./send.sh failure $WEBHOOK_URL
+  - ./send.sh failure $DISCORD_WEBHOOK
