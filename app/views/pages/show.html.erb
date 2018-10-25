@@ -1,19 +1,19 @@
+<h1><%= @page.title %></h1>
+
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @page.title %>
+  <% if @page.locked? %>
+    <strong>This article is locked from editing</strong>
+  <% end %>
 </p>
 
-<p>
-  <strong>Body:</strong>
-  <%= @page.body %>
-</p>
+<p><%= @page.body %></p>
 
-<p>
-  <strong>Locked:</strong>
-  <%= @page.locked %>
-</p>
-
-<%= link_to 'Edit', edit_page_path(@page) %> |
+<% if @page.locked? %>
+  <strong>This article has been locked from editing</strong>
+<% else %>
+  <%= link_to 'Edit', edit_page_path(@page) %>
+<% end %> |
+<%= link_to 'History', "/pages/#{@page.title}/history" %> |
 <%= link_to 'Back', pages_path %>
