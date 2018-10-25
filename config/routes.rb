@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get 'pages/:title/history', :to => 'pages#history'
 
-  resources :pages, param: :title, only: [:index, :show, :new, :edit]
+  resources :pages, param: :title
   resources :users
-  resources :revisions, only: [:index, :show, :create, :update, :destroy] # todo: remove update when I fix db
+  resources :revisions, only: [:index, :show, :create, :destroy]
 end

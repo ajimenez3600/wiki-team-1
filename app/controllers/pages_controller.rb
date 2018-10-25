@@ -2,14 +2,16 @@ class PagesController < ApplicationController
   before_action :set_page, only: [:show, :edit, :update, :destroy]
 
   # GET /pages
-  # GET /pages.json
   def index
     @pages = Page.all
   end
 
   # GET /pages/1
-  # GET /pages/1.json
   def show
+  end
+
+  # GET /pages/1/history
+  def history
   end
 
   # GET /pages/new
@@ -20,53 +22,25 @@ class PagesController < ApplicationController
   # GET /pages/1/edit
   def edit
     @revision = Revision.new
-    @version = @page.revisions.last.version
-    puts @version
-    if @version.nil?
-      @version = 1
-    else
-      @version = @version + 1
-    end
+    old = @page.revisions.last
+    @version = old.nil? ? 1 : old.version + 1
   end
 
   # POST /pages
-  # POST /pages.json
   def create
     @page = Page.new(page_params)
-
-    respond_to do |format|
-      if @page.save
-        format.html { redirect_to @page, notice: 'Page was successfully created.' }
-        format.json { render :show, status: :created, location: @page }
-      else
-        format.html { render :new }
-        format.json { render json: @page.errors, status: :unprocessable_entity }
-      end
-    end
+    redirect_to @page, notice: 'Page successfully created' if @page.save
   end
 
   # PATCH/PUT /pages/1
-  # PATCH/PUT /pages/1.json
   def update
-    respond_to do |format|
-      if @page.update(page_params)
-        format.html { redirect_to @page, notice: 'Page was successfully updated.' }
-        format.json { render :show, status: :ok, location: @page }
-      else
-        format.html { render :edit }
-        format.json { render json: @page.errors, status: :unprocessable_entity }
-      end
-    end
+    redirect_to @page, notice: 'Page successfully updated' if @page.update(page_params)
   end
 
   # DELETE /pages/1
-  # DELETE /pages/1.json
   def destroy
     @page.destroy
-    respond_to do |format|
-      format.html { redirect_to pages_url, notice: 'Page was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to pages_url, notice: 'Page was successfully destroyed.'
   end
 
   private
