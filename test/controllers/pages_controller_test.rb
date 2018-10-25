@@ -28,6 +28,11 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should show history" do
+    get "/pages/#{@page.title}/history"
+    assert_response :success
+  end
+
   test "should get edit" do
     get edit_page_url(@page)
     assert_response :success

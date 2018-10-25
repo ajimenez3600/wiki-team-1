@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root :to => 'pages#index'
 
   get 'pages/:title/history', :to => 'pages#history'
+  post 'revisions/:id/revert', :to => 'revisions#revert'
 
   resources :pages, param: :title
   resources :users

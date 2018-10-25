@@ -1,0 +1,24 @@
+<h1>'<%= @page.title %>' History</h1>
+<table>
+  <thead>
+    <tr>
+        <th>Version</th>
+        <th>Contents</th>
+      </tr>
+  </thead>
+  <tbody>
+    <% @page.revisions.each do |revision| %>
+      <tr>
+        <td><%= revision.version %></td>
+        <td><%= revision.contents %></td>
+        <td><%= link_to 'Show', revision %></td>
+        <% if revision != @page.revisions.last %>
+          <td><%= link_to 'Revert', { controller: "revisions", action: "revert", id: revision }, { method: :post, data: { confirm: 'Are you sure?' } } %></td>
+        <% else %>
+          <td>Current</td>
+        <% end %>
+        <td><%= link_to 'Destroy' ,revision, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

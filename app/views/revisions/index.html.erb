@@ -5,7 +5,6 @@
 <table>
   <thead>
     <tr>
-      <th>User</th>
       <th>Page</th>
       <th>Version</th>
       <th>Contents</th>
@@ -16,7 +15,6 @@
   <tbody>
     <% @revisions.each do |revision| %>
       <tr>
-        <td><%= revision.user_id %></td>
         <td><%= revision.page_id %></td>
         <td><%= revision.version %></td>
         <td><%= revision.contents %></td>

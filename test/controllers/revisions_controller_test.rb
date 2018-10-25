@@ -3,6 +3,7 @@ require 'test_helper'
 class RevisionsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @revision = revisions(:one)
+    @revision2 = revisions(:two)
     @page = pages(:one)
   end
 
@@ -23,6 +24,12 @@ class RevisionsControllerTest < ActionDispatch::IntegrationTest
 #    assert @revision.page.nil?
 #    get revision_url(@revision)
 #    assert_response :success
+#  end
+
+#  test "should revert revision" do
+#    assert_difference('@page.body') do
+#      post "/revisions/#{@page.revisions.first.id}/revert"
+#    end
 #  end
 
   test "should destroy revision" do

@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_action :set_page, only: [:show, :edit, :update, :destroy]
+  before_action :set_page, only: [:show, :history, :edit, :update, :destroy]
 
   # GET /pages
   def index
@@ -8,6 +8,7 @@ class PagesController < ApplicationController
 
   # GET /pages/1
   def show
+    redirect_to '/404' if @page.nil?
   end
 
   # GET /pages/1/history
