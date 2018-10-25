@@ -13,17 +13,12 @@
 
   <div class="field">
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, :placeholder => 'Enter article title..' %>
   </div>
 
   <div class="field">
     <%= form.label :body %>
-    <%= form.text_area :body %>
-  </div>
-
-  <div class="field">
-    <%= form.label :locked %>
-    <%= form.check_box :locked %>
+    <%= form.text_area :body, :placeholder => 'Enter article body...' %>
   </div>
 
   <div class="actions">

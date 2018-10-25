@@ -13,3 +13,31 @@
  *= require_tree .
  *= require_self
  */
+
+h1{
+  text-align: center;
+  background-color: gray;
+  padding: 20px;
+}
+
+/*Form changes*/
+
+/*Text field input*/
+
+label{
+  padding: 5px;
+  font-weight: bold;
+}
+input, textarea{
+  width : 50%;
+  border-radius: 4px;
+  border: 1px solid gray;
+  padding: 12px 20px;
+}
+
+/*Submit button*/
+input[type=submit]{
+  background-color: lightgray;
+  width: auto;
+}
+
