@@ -30,18 +30,25 @@ class PagesController < ApplicationController
   # POST /pages
   def create
     @page = Page.new(page_params)
-    redirect_to @page, notice: 'Page successfully created' if @page.save
+    if @page.save
+      flash[:success] = "Page was successfully created." 
+    end
+    redirect_to @page 
   end
 
   # PATCH/PUT /pages/1
   def update
-    redirect_to @page, notice: 'Page successfully updated' if @page.update(page_params)
+    if @page.update(page_params)
+      flash[:success] = "Page was successfully updated." 
+    end
+    redirect_to @page 
   end
 
   # DELETE /pages/1
   def destroy
     @page.destroy
-    redirect_to pages_url, notice: 'Page was successfully destroyed.'
+    flash[:success] = "Page was successfully destroyed."
+    redirect_to pages_url 
   end
 
   private
