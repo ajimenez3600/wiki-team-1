@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <%= form.text_area :contents %>
+  <%= form.text_area :contents, { value: @page.body, class: "quill_container" } %>
   <%= form.hidden_field :version, value: @version %>
   <%= form.hidden_field :page_id, value: @page.id %>
   <%= form.submit %>

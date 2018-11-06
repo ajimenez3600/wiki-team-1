@@ -12,7 +12,7 @@
   <% end %>
 
     <%= form.text_field :title, placeholder: "Give your masterpiece a title..." %>
-    <%= form.text_field :body, placeholder: "Give your masterpiece some content...", class: 'quill_container' %>
+    <%= form.text_area :body, placeholder: "Give your masterpiece some content...", class: 'quill_container' %>
     <%= form.submit "Submit" %>
 
 <% end %>

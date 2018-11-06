@@ -8,7 +8,7 @@
   <% end %>
 </p>
 
-<p><%= @page.body %></p>
+<p><%= @page.body.html_safe %></p>
 
 <% if @page.locked? %>
   <strong>This article has been locked from editing</strong>
