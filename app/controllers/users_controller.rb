@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   
   # PATCH/PUT /users/1
   def update
-    if @user.data(user_params)
+    if @user.update(user_params)
       flash[:success] = "User was successfully updated."
     end
     redirect_to @user
