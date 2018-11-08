@@ -3,10 +3,9 @@
 <%= render 'revisions/form', page: @page %>
 <br>
 
-<button class="btn btn-secondary" type = "button">
-  <%= link_to 'Show', @page, class: 'link-to-color' %>
-</button>
 
-<button class="btn btn-secondary" type = "button">
-  <%= link_to 'Back', pages_path, class: 'link-to-color' %>
-</button>
+<%= link_to 'Show', @page, class: 'link-to-color btn' %>
+
+
+<%= link_to 'Back', pages_path, class: 'link-to-color btn' %>
+
