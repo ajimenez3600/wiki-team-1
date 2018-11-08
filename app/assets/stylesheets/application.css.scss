@@ -125,3 +125,13 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+/*Manually add outline due to lower Bootstrap version*/
+.btn{
+  border: 1px solid gray;
+}
+
+/*Change link_to color*/
+.link-to-color{
+  color: black;
+}

@@ -1,6 +1,12 @@
 <h1>Editing Page</h1>
 
 <%= render 'revisions/form', page: @page %>
+<br>
 
-<%= link_to 'Show', @page %> |
-<%= link_to 'Back', pages_path %>
+<button class="btn btn-secondary" type = "button">
+  <%= link_to 'Show', @page, class: 'link-to-color' %>
+</button>
+
+<button class="btn btn-secondary" type = "button">
+  <%= link_to 'Back', pages_path, class: 'link-to-color' %>
+</button>
