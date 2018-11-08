@@ -13,9 +13,5 @@
   <%= @user.admin %>
 </p>
 
-<button class="btn btn-secondary" type = "button">
-  <%= link_to 'Edit', edit_user_path(@user), class: 'link-to-color' %> 
-</button>
-<button class="btn btn-secondary" type = "button">
-  <%= link_to 'Back', users_path, class: 'link-to-color' %>
-</button>
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

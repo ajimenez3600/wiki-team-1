@@ -1,10 +1,6 @@
 <h1>Editing User</h1>
 
 <%= render 'form', user: @user %>
-<br>
-<button class="btn btn-secondary" type = "button">
-  <%= link_to 'Show', @user, class: 'link-to-color' %>
-</button>
-<button class="btn btn-secondary" type = "button">
-  <%= link_to 'Back', users_path, class: 'link-to-color' %>
-</button>
+
+<%= link_to 'Show', @user %> |
+<%= link_to 'Back', users_path %>
