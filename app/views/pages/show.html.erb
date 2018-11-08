@@ -11,7 +11,10 @@
 <% if @page.locked? %>
   <strong>This article has been locked from editing</strong>
 <% else %>
-  <%= link_to 'Edit', edit_page_path(@page) %>
-<% end %> |
-<%= link_to 'History', "/pages/#{@page.title}/history" %> |
-<%= link_to 'Back', pages_path %>
+<br>
+  <%= link_to 'Edit', edit_page_path(@page), class: 'link-to-color btn' %>
+<% end %>
+
+<%= link_to 'History', "/pages/#{@page.title}/history", class: 'link-to-color btn' %> 
+
+<%= link_to 'Back', pages_path, class: 'link-to-color btn' %>
