@@ -4,13 +4,14 @@
     <tr>
         <th>Version</th>
         <th>Contents</th>
+        <th colspan = "3"></th>
       </tr>
   </thead>
   <tbody>
     <% @page.revisions.each do |revision| %>
       <tr>
         <td><%= revision.version %></td>
-        <td><%= revision.contents %></td>
+        <td><%= revision.contents.html_safe %></td>
         <td><%= link_to 'Show', revision %></td>
         <% if revision != @page.revisions.last %>
           <td><%= link_to 'Revert', { controller: "revisions", action: "revert", id: revision }, { method: :post, data: { confirm: 'Are you sure?' } } %></td>
@@ -23,4 +24,4 @@
   </tbody>
 </table>
 
-<%= link_to 'Back', page_path(@page) %>
+<%= link_to 'Back', pages_path(@page), class: 'link-to-color btn' %>

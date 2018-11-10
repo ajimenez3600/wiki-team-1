@@ -1,14 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Page:</strong>
+<h1>
   <%= Page.find(@revision.page_id).title %>
-</p>
+</h1>
 
-<p>
-  <strong>Contents:</strong>
-  <%= @revision.contents %>
-</p>
+<div class = "jumbotron">
+  <%= @revision.contents.html_safe %>
+</div>
 
 <%= link_to 'Back', revisions_path, class: 'link-to-color btn' %>
 

@@ -1,10 +1,9 @@
 <h1>Editing Page</h1>
-
-<%= render 'revisions/form', page: @page %>
-
+<div class= "jumbotron">
+  <%= render 'revisions/form', page: @page %>
+</div>
 
 <%= link_to 'Show', @page, class: 'link-to-color btn' %>
 
 
 <%= link_to 'Back', pages_path, class: 'link-to-color btn' %>
-
