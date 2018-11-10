@@ -14,7 +14,7 @@
   <tbody>
     <% @revisions.each do |revision| %>
       <tr>
-        <td><%= revision.page_id %></td>
+        <td><%= revision.page.title %></td>
         <td><%= revision.version %></td>
         <td><%= link_to 'Show', revision %></td>
         <td><%= link_to 'Destroy', revision, method: :delete, data: { confirm: 'Are you sure?' } %></td>
