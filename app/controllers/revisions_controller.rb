@@ -26,8 +26,9 @@ class RevisionsController < ApplicationController
 
   # DELETE /revisions/1
   def destroy
+    page = @revision.page
     @revision.destroy
-    redirect_to revisions_url, notice: 'Revision was successfully destroyed.'
+    redirect_to "/pages/#{page.title}/history", notice: 'Revision was successfully destroyed.'
   end
 
   private
@@ -38,7 +39,7 @@ class RevisionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def revision_params
-      params.require(:revision).permit(:page_id, :version, :contents)
+      params.require(:revision).permit(:page_id, :version, :title, :contents)
     end
 
     # Saves a revision and its attached page

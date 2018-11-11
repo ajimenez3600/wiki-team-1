@@ -2,12 +2,17 @@
 
 <p>
   <strong>Page:</strong>
-  <%= Page.find(@revision.page_id).title %>
+  <%= @revision.page.title %>
+</p>
+
+<p>
+  <strong>Created:</strong>
+  <%= @revision.page.created_at %>
 </p>
 
 <p>
   <strong>Contents:</strong>
-  <%= @revision.contents %>
+  <%= @revision.contents.html_safe %>
 </p>
 
 <%= link_to 'Back', revisions_path, class: 'link-to-color btn' %>

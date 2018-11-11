@@ -23,24 +23,28 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = "User was successfully created." 
+      flash[:success] = "User was successfully created."
+      redirect_to @user 
+    else
+      render new_user_path
     end
-    redirect_to @user
   end
   
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
       flash[:success] = "User was successfully updated."
+      redirect_to @user
+    else
+      render 'edit'
     end
-    redirect_to @user
   end
 
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy    
     @user.destroy
-      flash[:success] = "User was successfully destroyed."
+    flash[:success] = "User was successfully destroyed."
     redirect_to users_url
   end
 

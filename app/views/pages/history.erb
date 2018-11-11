@@ -3,6 +3,7 @@
   <thead>
     <tr>
         <th>Version</th>
+        <th>Title</th>
         <th>Contents</th>
       </tr>
   </thead>
@@ -10,14 +11,13 @@
     <% @page.revisions.each do |revision| %>
       <tr>
         <td><%= revision.version %></td>
-        <td><%= revision.contents %></td>
+        <td><%= revision.title %></td>
+        <td><%= revision.contents.html_safe %></td>
         <td><%= link_to 'Show', revision %></td>
         <% if revision != @page.revisions.last %>
           <td><%= link_to 'Revert', { controller: "revisions", action: "revert", id: revision }, { method: :post, data: { confirm: 'Are you sure?' } } %></td>
-        <% else %>
-          <td>Current</td>
+          <td><%= link_to 'Destroy' ,revision, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
-        <td><%= link_to 'Destroy' ,revision, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
