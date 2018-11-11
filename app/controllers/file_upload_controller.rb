@@ -1,17 +1,25 @@
 class FileUploadController < ApplicationController
   def index
-    @fileUpload = fileUpload.all
+    @file_upload = file_upload.all
+  end
+
+  def show
+    @file_upload = file_upload.find(params[:id])
+  end
+
+  def edit
+    @file_upload
   end
 
   def new
-    @fileUpload = fileUpload.new
+    @file_upload = file_upload.new
   end
 
   def create
-    @fileUpload = fileUpload.new(fileUpload_params)
+    @file_upload = file_upload.new(file_upload_params)
 
-    if @fileUpload.save
-      redirect_to_fileUpload_path, notice: "Successfully uploaded."
+    if @file_upload.save
+      redirect_to_file_upload_path, notice: "Successfully uploaded."
     else
       render "new"
     end
@@ -20,14 +28,14 @@ class FileUploadController < ApplicationController
   end
 
   def destroy
-    @fileUpload = fileUpload.find(params[:id])
-    @fileUpload.destroy
-    redirect_to_fileUpload_path, notice: "Successfully deleted."
+    @file_upload = file_upload.find(params[:id])
+    @file_upload.destroy
+    redirect_to_file_upload_path, notice: "Successfully deleted."
   end
 
   private
-    def fileUpload_params
-    params.require(:fileUpload).permit(:name, :attachment)
+    def ffile_upload_params
+    params.require(:file_upload).permit(:name, :attachment)
   end
 
 end
