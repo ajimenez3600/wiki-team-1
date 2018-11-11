@@ -1,17 +1,13 @@
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+<h1>
+  <strong>User</strong>
+</h1>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Admin:</strong>
-  <%= @user.admin %>
-</p>
+<div class="jumbotron">
+    <h1 class="display-4"> <%= @user.name %></h1>
+    <hr class = "my-4">
+      <p><%= @user.email %></p>
+      <p><%= @user.admin %></p>
+</div>
 
 <%= link_to 'Edit', edit_user_path(@user), class: 'link-to-color btn' %> 
 

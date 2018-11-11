@@ -46,8 +46,10 @@ class RevisionsController < ApplicationController
     def save_revision(revision)
       if revision.save
         revision.page.body = revision.contents
-        redirect_to revision.page, notice: 'Revision Created' and return if revision.page.save
+        flash[:success] = 'Revision created.'
+        redirect_to revision.page and return if revision.page.save
       end
-      redirect_to revision.page, notice: 'Revision Failed'
+      flash[:danger] = 'Revision failed.'
+      redirect_to revision.page
     end
 end

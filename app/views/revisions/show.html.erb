@@ -10,10 +10,9 @@
   <%= @revision.page.created_at %>
 </p>
 
-<p>
-  <strong>Contents:</strong>
+<div class = "jumbotron">
   <%= @revision.contents.html_safe %>
-</p>
+</div>
 
 <%= link_to 'Back', revisions_path, class: 'link-to-color btn' %>
 
