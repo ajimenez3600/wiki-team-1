@@ -24,7 +24,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:success] = "User was successfully created." 
-    end
+    else
+      flash[:danger] = "User unsuccessfully created."
+    end 
     redirect_to @user
   end
   
@@ -32,6 +34,8 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:success] = "User was successfully updated."
+    else
+      flash[:danger] = "User unsuccessfully updated."
     end
     redirect_to @user
   end

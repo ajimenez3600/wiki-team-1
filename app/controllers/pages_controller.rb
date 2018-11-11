@@ -31,7 +31,9 @@ class PagesController < ApplicationController
   def create
     @page = Page.new(page_params)
     if @page.save
-      flash[:success] = "Page was successfully created." 
+      flash[:success] = "Page was successfully created."
+    else 
+      flash[:danger] = "Page unsuccessfully created."
     end
     redirect_to @page 
   end
@@ -40,6 +42,8 @@ class PagesController < ApplicationController
   def update
     if @page.update(page_params)
       flash[:success] = "Page was successfully updated." 
+    else
+      flash[:danger] = "Page unsuccessfully updated."
     end
     redirect_to @page 
   end
