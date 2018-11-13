@@ -19,7 +19,7 @@ class FileUploadController < ApplicationController
     @file_upload = FileUpload.new(file_upload_params)
 
     if @file_upload.save
-      redirect_to_file_upload_path, notice: "Successfully uploaded."
+      redirect_to file_upload_path, notice: "Successfully uploaded."
     else
       render "new"
     end
@@ -30,7 +30,7 @@ class FileUploadController < ApplicationController
   def destroy
     @file_upload = FileUpload.find(params[:id])
     @file_upload.destroy
-    redirect_to_file_upload_path, notice: "Successfully deleted."
+    redirect_to file_upload_path, notice: "Successfully deleted."
   end
 
   private
