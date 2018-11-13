@@ -7,5 +7,5 @@ Rails.application.routes.draw do
 
   resources :pages, param: :title
   resources :users
-  resources :revisions, only: [:index, :show, :create, :destroy]
+  resources :revisions, only: [:index, :show, :destroy]
 end

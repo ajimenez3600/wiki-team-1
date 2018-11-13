@@ -10,12 +10,6 @@ class RevisionsController < ApplicationController
   def show
   end
 
-  # POST /revisions
-  def create
-    @revision = Revision.new(revision_params)
-    save_revision(@revision)
-  end
-
   # POST /revisions/1/revert
   def revert
     page = @revision.page
@@ -26,8 +20,9 @@ class RevisionsController < ApplicationController
 
   # DELETE /revisions/1
   def destroy
+    page = @revision.page
     @revision.destroy
-    redirect_to revisions_url, notice: 'Revision was successfully destroyed.'
+    redirect_to "/pages/#{page.title}/history", notice: 'Revision was successfully destroyed.'
   end
 
   private
@@ -36,17 +31,15 @@ class RevisionsController < ApplicationController
       @revision = Revision.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def revision_params
-      params.require(:revision).permit(:page_id, :version, :contents)
-    end
-
     # Saves a revision and its attached page
     def save_revision(revision)
       if revision.save
         revision.page.body = revision.contents
-        redirect_to revision.page, notice: 'Revision Created' and return if revision.page.save
+        flash[:success] = 'Revision created.'
+        redirect_to revision.page and return if revision.page.save
+      else
+        flash[:danger] = 'Revision failed.'
+        redirect_to revision.page
       end
-      redirect_to revision.page, notice: 'Revision Failed'
     end
 end
