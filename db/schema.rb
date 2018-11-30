@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_13_035418) do
+ActiveRecord::Schema.define(version: 2018_11_30_172103) do
 
   create_table "pages", force: :cascade do |t|
     t.string "title"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2018_11_13_035418) do
     t.boolean "locked"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "img_filename"
   end
 
   create_table "revisions", force: :cascade do |t|
