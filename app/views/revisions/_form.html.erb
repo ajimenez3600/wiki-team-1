@@ -12,6 +12,7 @@
   <% end %>
 
   <%= form.text_area :contents, { value: @page.body, class: "quill_container" } %>
+  <%= form.file_field :image %>
   <%= form.hidden_field :version, value: @version %>
   <%= form.hidden_field :page_id, value: @page.id %>
   <%= form.submit %>

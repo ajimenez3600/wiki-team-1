@@ -10,21 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_14_025335) do
-
-  create_table "file_uploads", force: :cascade do |t|
-    t.string "name"
-    t.string "attatchment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "images", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "name"
-    t.string "attachment"
-  end
+ActiveRecord::Schema.define(version: 2018_12_03_225916) do
 
   create_table "pages", force: :cascade do |t|
     t.string "title"
@@ -32,6 +18,7 @@ ActiveRecord::Schema.define(version: 2018_11_14_025335) do
     t.boolean "locked"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "file_path"
   end
 
   create_table "revisions", force: :cascade do |t|
@@ -41,7 +28,7 @@ ActiveRecord::Schema.define(version: 2018_11_14_025335) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "version"
-    t.string "title"
+    t.string "file_path"
   end
 
   create_table "users", force: :cascade do |t|

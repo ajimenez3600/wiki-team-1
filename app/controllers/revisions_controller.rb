@@ -38,7 +38,7 @@ class RevisionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def revision_params
-      params.require(:revision).permit(:page_id, :version, :contents)
+      params.require(:revision).permit(:page_id, :version, :contents, :image)
     end
 
     # Saves a revision and its attached page

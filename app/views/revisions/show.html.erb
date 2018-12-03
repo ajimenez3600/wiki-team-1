@@ -10,6 +10,8 @@
   <%= @revision.contents %>
 </p>
 
+<%= image_tag  "/images/#{@revision.id}/#{@revision.file_path}" if @revision.file_path? %>
+
 <button class="btn btn-secondary" type = "button">
   <%= link_to 'Back', revisions_path, class: 'link-to-color' %>
 </button>
