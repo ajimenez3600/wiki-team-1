@@ -11,6 +11,11 @@ class PagesController < ApplicationController
     redirect_to '/404' if @page.nil?
   end
 
+  # GET /pages/search?title=[:title]
+  def search
+    @pages = Page.all
+  end
+
   # GET /pages/1/history
   def history
   end
