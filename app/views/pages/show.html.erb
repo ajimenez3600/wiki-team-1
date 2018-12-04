@@ -5,23 +5,17 @@
   <strong>This article is locked from editing</strong>
   <% end %>
 </p>
-
-<p><%= @page.body.html_safe %></p>
-<%= image_tag  "/images/#{@page.id}/#{@page.file_path}" if @page.file_path? %>
-
+<div class = "jumbotron">
+  <p><%= @page.body.html_safe %></p>
+  <%= image_tag  "/images/#{@page.id}/#{@page.file_path}" if @page.file_path? %>
+</div>
 <% if @page.locked? %>
 <strong>This article has been locked from editing</strong>
 <% else %>
 <br>
-<button class="btn btn-secondary" type = "button">
-  <%= link_to 'Edit', edit_page_path(@page), class: 'link-to-color' %>
-</button>
+<%= link_to 'Edit', edit_page_path(@page), class: 'link-to-color btn' %>
 <% end %>
 
-<button class="btn btn-secondary" type = "button">
-  <%= link_to 'History', "/pages/#{@page.title}/history", class: 'link-to-color' %> 
-</button>
+<%= link_to 'History', "/pages/#{@page.title}/history", class: 'link-to-color btn' %> 
 
-<button class="btn btn-secondary" type = "button">
-  <%= link_to 'Back', pages_path, class: 'link-to-color' %>
-</button>
+<%= link_to 'Back', pages_path, class: 'link-to-color btn' %>

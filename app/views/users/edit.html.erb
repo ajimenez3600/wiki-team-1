@@ -1,10 +1,9 @@
 <h1>Editing User</h1>
-
+<div class="jumbotron">
 <%= render 'form', user: @user %>
+</div>
 <br>
-<button class="btn btn-secondary" type = "button">
-  <%= link_to 'Show', @user, class: 'link-to-color' %>
-</button>
-<button class="btn btn-secondary" type = "button">
-  <%= link_to 'Back', users_path, class: 'link-to-color' %>
-</button>
+
+<%= link_to 'Show', @user, class: 'link-to-color btn' %>
+
+<%= link_to 'Back', users_path, class: 'link-to-color btn' %>

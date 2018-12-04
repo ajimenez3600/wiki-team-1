@@ -10,8 +10,10 @@
       </ul>
     </div>
   <% end %>
-  
+
   <%= form.text_field :name, placeholder: "Enter your username..." %>
   <%= form.email_field :email, placeholder: "Enter your email..." %>
+  <%= form.password_field :password, placeholder: "Enter your password..." %>
+  <%= form.password_field :password_confirmation, placeholder: "Confirm your password..." %>
   <%= form.submit %>
 <% end %>

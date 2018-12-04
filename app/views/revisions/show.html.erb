@@ -2,16 +2,21 @@
 
 <p>
   <strong>Page:</strong>
-  <%= Page.find(@revision.page_id).title %>
+  <%= @revision.page.title %>
 </p>
 
 <p>
-  <strong>Contents:</strong>
-  <%= @revision.contents %>
+  <strong>Created:</strong>
+  <%= @revision.page.created_at %>
 </p>
+
 
 <%= image_tag  "/images/#{@revision.id}/#{@revision.file_path}" if @revision.file_path? %>
 
-<button class="btn btn-secondary" type = "button">
-  <%= link_to 'Back', revisions_path, class: 'link-to-color' %>
-</button>
+<div class = "jumbotron">
+  <%= @revision.contents.html_safe %>
+</div>
+
+<%= link_to 'Back', revisions_path, class: 'link-to-color btn' %>
+
+

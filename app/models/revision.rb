@@ -19,4 +19,5 @@ class Revision < ApplicationRecord
         self.image = nil
         update file_path: filename
     end
+    validates :title, :contents, presence: true, allow_blank: false
 end

@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2018_12_03_225916) do
+=======
+ActiveRecord::Schema.define(version: 2018_11_13_035418) do
+>>>>>>> master
 
   create_table "pages", force: :cascade do |t|
     t.string "title"
@@ -28,7 +32,11 @@ ActiveRecord::Schema.define(version: 2018_12_03_225916) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "version"
+<<<<<<< HEAD
     t.string "file_path"
+=======
+    t.string "title"
+>>>>>>> master
   end
 
   create_table "users", force: :cascade do |t|
@@ -37,6 +45,8 @@ ActiveRecord::Schema.define(version: 2018_12_03_225916) do
     t.boolean "admin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password"
+    t.string "password_confirmation"
   end
 
 end

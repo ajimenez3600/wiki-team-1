@@ -22,26 +22,29 @@ class PagesController < ApplicationController
 
   # GET /pages/1/edit
   def edit
-    @revision = Revision.new
-    old = @page.revisions.last
-    @version = old.nil? ? 1 : old.version + 1
   end
 
   # POST /pages
   def create
     @page = Page.new(page_params)
-    if @page.save
-      flash[:success] = "Page was successfully created." 
+    if @page.save and new_revision
+      flash[:success] = "Page was successfully created."
+      redirect_to @page
+    else
+      flash[:danger] = "Failed to create page."
+      render 'new'
     end
-    redirect_to @page 
   end
 
   # PATCH/PUT /pages/1
   def update
-    if @page.update(page_params)
-      flash[:success] = "Page was successfully updated." 
+    if @page.update(page_params) and new_revision
+      flash[:success] = "Page was successfully updated."
+      redirect_to @page
+    else
+      flash[:danger] = "Failed to update page."
+      render 'edit'
     end
-    redirect_to @page 
   end
 
   # DELETE /pages/1
@@ -60,5 +63,14 @@ class PagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
       params.require(:page).permit(:title, :body, :locked, :image)
+    end
+
+    def new_revision
+      revision = Revision.new
+      revision.page = @page
+      revision.title = @page.title
+      revision.contents = @page.body
+      revision.version = @page.revisions.count + 1
+      revision.save
     end
 end
