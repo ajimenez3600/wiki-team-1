@@ -8,10 +8,5 @@ Rails.application.routes.draw do
 
   resources :pages, param: :title
   resources :users
-<<<<<<< HEAD
-  resources :revisions, only: [:index, :show, :create, :destroy]
-  resources :file_upload, only: [:index, :new, :create, :destroy]
-=======
   resources :revisions, only: [:index, :show, :destroy]
->>>>>>> master
 end

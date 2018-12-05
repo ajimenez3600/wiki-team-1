@@ -31,14 +31,11 @@ class RevisionsController < ApplicationController
       @revision = Revision.find(params[:id])
     end
 
-<<<<<<< HEAD
     # Never trust parameters from the scary internet, only allow the white list through.
     def revision_params
       params.require(:revision).permit(:page_id, :version, :contents, :image)
     end
 
-=======
->>>>>>> master
     # Saves a revision and its attached page
     def save_revision(revision)
       if revision.save
