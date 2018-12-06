@@ -1,19 +1,19 @@
 <h1><%= @page.title %></h1>
 
-<p>
-  <% if @page.locked? %>
-  <strong>This article is locked from editing</strong>
+  <% if true %>
+    <div class="alert alert-warning">
+      <strong>This article is locked from editing</strong>
+    </div>
   <% end %>
-</p>
 <div class = "jumbotron">
   <p><%= @page.body.html_safe %></p>
   <%= image_tag  "/images/#{@page.id}/#{@page.file_path}" if @page.file_path? %>
 </div>
 <% if @page.locked? %>
-<strong>This article has been locked from editing</strong>
+  <strong>This article has been locked from editing</strong>
 <% else %>
-<br>
-<%= link_to 'Edit', edit_page_path(@page), class: 'link-to-color btn' %>
+  <br>
+  <%= link_to 'Edit', edit_page_path(@page), class: 'link-to-color btn' %>
 <% end %>
 
 <%= link_to 'History', "/pages/#{@page.title}/history", class: 'link-to-color btn' %> 
