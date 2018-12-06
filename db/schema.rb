@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 2018_12_03_225916) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "version"
-    t.string "file_path"
     t.string "title"
+    t.string "file_path"
   end
 
   create_table "users", force: :cascade do |t|
