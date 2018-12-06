@@ -3,7 +3,11 @@ class PagesController < ApplicationController
 
   # GET /pages
   def index
-    @pages = Page.all
+    if params[:title] then
+      @pages = Page.where("title like ?", "%#{params[:title]}%")
+    else
+      @pages = Page.all
+    end
   end
 
   # GET /pages/1
@@ -62,7 +66,7 @@ class PagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
-      params.require(:page).permit(:title, :body, :locked)
+      params.require(:page).permit(:title, :body, :locked, :image)
     end
 
     def new_revision

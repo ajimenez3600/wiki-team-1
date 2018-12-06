@@ -20,12 +20,16 @@ RSpec.describe 'pages', type: :request do
 
     describe '#create' do
         it 'creates a new page and revision' do
-            post '/pages', params: { page: { locked: false, title: 'Title', body: 'Body' } }
+            post '/pages', params: { page: { locked: false, title: 'NewTitle', body: 'Body' } }
             page = Page.last
-            expect(page.title).to eq 'Title'
+            expect(page.title).to eq 'NewTitle'
             expect(page.body).to eq 'Body'
             expect(page.revisions.count).to eq 1
-            expect(page.revisions.last.title).to eq 'Title'
+            expect(page.revisions.last.title).to eq 'NewTitle'
+        end
+        it 'should fail to create a new page when titles are not unique' do
+            post '/pages', params: { page: { locked: false, title: 'Title', body: 'Fail' } }
+            expect(Page.last.body).not_to eq 'Fail'
         end
         it 'should fail to create a new page' do
             post '/pages', params: { page: { locked: false, body: 'Fail' } }

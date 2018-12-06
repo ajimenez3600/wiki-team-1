@@ -7,6 +7,7 @@
 </p>
 <div class = "jumbotron">
   <p><%= @page.body.html_safe %></p>
+  <%= image_tag  "/images/#{@page.id}/#{@page.file_path}" if @page.file_path? %>
 </div>
 <% if @page.locked? %>
 <strong>This article has been locked from editing</strong>
