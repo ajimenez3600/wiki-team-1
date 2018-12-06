@@ -3,17 +3,16 @@ class PagesController < ApplicationController
 
   # GET /pages
   def index
-    @pages = Page.all
+    if params[:title] then
+      @pages = Page.where("title like ?", "%#{params[:title]}%")
+    else
+      @pages = Page.all
+    end
   end
 
   # GET /pages/1
   def show
     redirect_to '/404' if @page.nil?
-  end
-
-  # GET /pages/search?title=[:title]
-  def search
-    @pages = Page.all
   end
 
   # GET /pages/1/history
