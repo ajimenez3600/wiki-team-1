@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'users', type: :request do
-    before do
-        @user = User.create(name: 'Example', email: 'example@example.com', admin: false)
+    before do        
+        @user = User.create(name: 'Example', email: 'example@example.com', admin: false, password: 'p', password_confirmation: 'p')
         @user.save
     end
 
