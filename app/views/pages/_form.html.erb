@@ -1,5 +1,6 @@
 <%= bootstrap_form_for(@page) do |form| %>
   <%= form.text_field :title, placeholder: "Give your masterpiece a title..." %>
   <%= form.text_area :body, placeholder: "Give your masterpiece some content...", class: 'quill_container' %>
+  <%= form.file_field :image %>
   <%= form.submit "Submit" %>
 <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_13_035418) do
+ActiveRecord::Schema.define(version: 2018_12_03_225916) do
 
   create_table "pages", force: :cascade do |t|
     t.string "title"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2018_11_13_035418) do
     t.boolean "locked"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "file_path"
   end
 
   create_table "revisions", force: :cascade do |t|
@@ -27,6 +28,7 @@ ActiveRecord::Schema.define(version: 2018_11_13_035418) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "version"
+    t.string "file_path"
     t.string "title"
   end
 
