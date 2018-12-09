@@ -1,5 +1,7 @@
 class PagesController < ApplicationController
-  before_action :set_page, only: [:show, :history, :edit, :update, :destroy]
+  before_action :set_page, only: [:show, :lock, :unlock, :history, :edit, :update, :destroy]
+  before_action :confirm_authenticated, only: [:new, :edit]
+  before_action :confirm_admin, only: [:lock, :unlock]
 
   # GET /pages
   def index
@@ -13,6 +15,24 @@ class PagesController < ApplicationController
   # GET /pages/1
   def show
     redirect_to '/404' if @page.nil?
+  end
+
+  def lock
+    @page.locked = true
+    if @page.save
+      redirect_to @page
+    else
+      render 'show'
+    end
+  end
+
+  def unlock
+    @page.locked = false
+    if @page.save
+      redirect_to @page
+    else
+      render 'show'
+    end
   end
 
   # GET /pages/1/history
@@ -80,5 +100,13 @@ class PagesController < ApplicationController
       revision.version = @page.revisions.count + 1
       revision.file_path = @page.image
       revision.save
+    end
+
+    def confirm_authenticated
+      redirect_to '/401' unless user_signed_in?
+    end
+
+    def confirm_admin
+      redirecct_to '/403' unless current_user and current_user.admin?
     end
 end
