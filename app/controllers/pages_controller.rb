@@ -55,8 +55,11 @@ class PagesController < ApplicationController
   # DELETE /pages/1
   def destroy
     @page.destroy
+
+    @path = 'public/images/' + @page.id.to_s + '/'
+    FileUtils.rm_rf(@path);
     flash[:success] = "Page was successfully destroyed."
-    redirect_to pages_url 
+    redirect_to pages_url
   end
 
   private
@@ -76,6 +79,7 @@ class PagesController < ApplicationController
       revision.title = @page.title
       revision.contents = @page.body
       revision.version = @page.revisions.count + 1
+      revision.file_path = @page.image
       revision.save
     end
 end
