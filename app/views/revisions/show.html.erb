@@ -11,7 +11,7 @@
 </p>
 
 
-<%= image_tag  "/images/#{@revision.id}/#{@revision.file_path}" if @revision.file_path? %>
+<%= image_tag  "/images/#{@revision.page_id}/#{@revision.file_path}" if @revision.file_path? %>
 
 <div class = "jumbotron">
   <%= @revision.contents.html_safe %>
