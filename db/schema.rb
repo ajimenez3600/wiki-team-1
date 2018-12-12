@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_12_020752) do
+ActiveRecord::Schema.define(version: 2018_12_12_212119) do
 
   create_table "blacklists", force: :cascade do |t|
     t.string "ip", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "image_comments", force: :cascade do |t|
+    t.string "user"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "user"
+    t.string "dimenstions"
+    t.integer "filesize"
+    t.string "filepath"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

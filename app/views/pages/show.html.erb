@@ -11,7 +11,7 @@
 
 <div class = "jumbotron">
   <p><%= @page.body.html_safe %></p>
-  <%= image_tag  "/images/#{@page.id}/#{@page.file_path}" if @page.file_path? %>
+  <%= link_to(image_tag("/images/#{@page.id}/#{@page.file_path}"), "images#show" %>
 </div>
 <div class="pull-right">
   <em>Last edited by <%= @page.revisions.last.user.username %> at <%= @page.revisions.last.created_at %></em>
