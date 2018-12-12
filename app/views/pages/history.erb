@@ -16,7 +16,7 @@
         <td><%= revision.user.username %></td>
         <td><%= revision.created_at %></td>
         <% if revision != @page.revisions.last %>
-          <% if current_user %>
+          <% if current_user && (!current_user.banned? || current_user.admin?) %>
             <td><%= link_to 'Revert', { controller: "revisions", action: "revert", id: revision }, { method: :post, data: { confirm: 'Are you sure?' } } %></td>
             <% if current_user.admin? %>
               <td><%= link_to 'Destroy' ,revision, method: :delete, data: { confirm: 'Are you sure?' } %></td>

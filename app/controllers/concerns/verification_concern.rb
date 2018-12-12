@@ -7,7 +7,7 @@ module VerificationConcern
     end
 
     def confirm_authenticated
-        redirect_to '/401' unless user_signed_in?
+        redirect_to '/401' unless user_signed_in? and (!current_user.banned? || current_user.admin?)
     end
   
     def confirm_admin

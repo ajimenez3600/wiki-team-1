@@ -14,7 +14,7 @@
         <td><%= page.revisions.last.user.username %></td>
         <td><%= page.revisions.last.created_at %></td>
         <td><%= link_to 'History', "/pages/#{page.title}/history" %></td>
-        <% if current_user and !page.locked %>
+        <% if current_user and (!current_user.banned? || current_user.admin?) and !page.locked %>
           <td><%= link_to 'Edit', edit_page_path(page) %></td>
           <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>

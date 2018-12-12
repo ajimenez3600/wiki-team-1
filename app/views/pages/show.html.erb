@@ -25,7 +25,7 @@
   <% end %>
 <% end %>
 
-<% if current_user and !@page.locked? %>
+<% if current_user and (!current_user.banned? || current_user.admin?) and !@page.locked? %>
   <%= link_to 'Edit', edit_page_path(@page), class: 'link-to-color btn' %>
 <% end %>
 <%= link_to 'History', "/pages/#{@page.title}/history", class: 'link-to-color btn' %> 

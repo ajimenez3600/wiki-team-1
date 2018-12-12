@@ -15,6 +15,6 @@
     </p>    
 </div>
 
-<%= <%= button_to 'Ban', { controller: "blacklists", action: "create", blacklist: { ip: user.last_sign_in_ip } }, { method: :post, data: { confirm: 'Are you sure?' }, class: "btn" } %> %>
-<%= button_to 'Back', :back, class: 'btn' %>
+<%= link_to 'Ban', { controller: "blacklists", action: "create", blacklist: { ip: @user.last_sign_in_ip } }, { method: :post, data: { confirm: 'Are you sure?' }, class: "btn link-to-color" } %>
+<%= link_to 'Back', '/blacklists', class: 'btn link-to-color' %>
 

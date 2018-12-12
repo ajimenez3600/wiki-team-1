@@ -6,4 +6,8 @@ class User < ApplicationRecord
          
   validates :username, uniqueness: true
   has_many :revisions
+
+  def banned?
+    Blacklist.exists?(ip: self.current_sign_in_ip)
+  end
 end
