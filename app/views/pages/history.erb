@@ -2,27 +2,30 @@
 <table class="table table-striped table-hover">
   <thead>
     <tr>
-        <th>Version</th>
         <th>Title</th>
-        <th colspan = "3"></th>
+        <th>Version</th>
+        <th>Editing User</th>
+        <th>Edited At</th>
       </tr>
   </thead>
   <tbody>
     <% @page.revisions.each do |revision| %>
       <tr>
+        <td><%= link_to revision.title, revision %></td>
         <td><%= revision.version %></td>
-        <td><%= revision.title %></td>
-        <td><%= link_to 'Show', revision %></td>
+        <td><%= revision.user.username %></td>
+        <td><%= revision.created_at %></td>
         <% if revision != @page.revisions.last %>
-          <td><%= link_to 'Revert', { controller: "revisions", action: "revert", id: revision }, { method: :post, data: { confirm: 'Are you sure?' } } %></td>
-          <td><%= link_to 'Destroy' ,revision, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% else %> 
-          <td></td>
-          <td></td>
+          <% if current_user %>
+            <td><%= link_to 'Revert', { controller: "revisions", action: "revert", id: revision }, { method: :post, data: { confirm: 'Are you sure?' } } %></td>
+            <% if current_user.admin? %>
+              <td><%= link_to 'Destroy' ,revision, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+          <% end %>
         <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'Back', pages_path(@page), class: 'link-to-color btn' %>
+<%= link_to 'Back', :back, class: 'link-to-color btn' %>

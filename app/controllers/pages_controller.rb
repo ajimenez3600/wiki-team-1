@@ -1,7 +1,8 @@
 class PagesController < ApplicationController
+  include VerificationConcern
   before_action :set_page, only: [:show, :lock, :unlock, :history, :edit, :update, :destroy]
-  before_action :confirm_authenticated, only: [:new, :edit]
-  before_action :confirm_admin, only: [:lock, :unlock]
+  before_action :confirm_authenticated, only: [:new, :create, :edit, :update]
+  before_action :confirm_admin, only: [:lock, :unlock, :delete]
 
   # GET /pages
   def index
@@ -99,14 +100,7 @@ class PagesController < ApplicationController
       revision.contents = @page.body
       revision.version = @page.revisions.count + 1
       revision.file_path = @page.image
+      revision.user = current_user
       revision.save
-    end
-
-    def confirm_authenticated
-      redirect_to '/401' unless user_signed_in?
-    end
-
-    def confirm_admin
-      redirecct_to '/403' unless current_user and current_user.admin?
     end
 end

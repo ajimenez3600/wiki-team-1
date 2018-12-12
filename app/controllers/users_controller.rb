@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+    include VerificationConcern
     before_action :set_user, only: [:show]
+    before_action :confirm_admin
 
     # GET /users
     def index

@@ -1,0 +1,17 @@
+<h1>Blacklist</h1>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>IP Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @blacklists.each do |blacklist| %>
+      <tr>
+        <td><%= blacklist.ip %></td>
+        <td><%= link_to 'Destroy', blacklist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

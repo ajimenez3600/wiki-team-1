@@ -7,17 +7,15 @@
     <tr>
       <th>Page</th>
       <th>Version</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @revisions.each do |revision| %>
       <tr>
-        <td><%= revision.page.title %></td>
+        <td><%= link_to revision.page.title, revision %></td>
         <td><%= revision.version %></td>
-        <td><%= link_to 'Show', revision %></td>
-        <% if current_user and !revision.page.locked? %>
+        <% if current_user and current_user.admin %>
           <td><%= link_to 'Destroy', revision, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
