@@ -11,7 +11,7 @@
 
 <div class = "jumbotron">
   <p><%= @page.body.html_safe %></p>
-  <% @page.images.each do |image| %>
+  <% @page.revisions.last.images.each do |image| %>
     <%= image_tag image %>
   <% end %>
 </div>

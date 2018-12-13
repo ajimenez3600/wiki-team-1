@@ -39,10 +39,8 @@ class RevisionsController < ApplicationController
     # Saves a revision and its attached page
     def save_revision(revision)
       if revision.save
-        revision.page.images.purge
         revision.page.title = revision.title
         revision.page.body = revision.contents
-        revision.page.images.attach(revision.images.map{|image|image.blob})
         flash[:success] = 'Revision created.'
         redirect_to revision.page and return if revision.page.save
       else

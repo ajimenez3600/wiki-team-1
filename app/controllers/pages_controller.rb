@@ -52,7 +52,7 @@ class PagesController < ApplicationController
   # POST /pages
   def create
     @page = Page.create! page_params
-    if attach_blob and new_revision
+    if new_revision
       flash[:success] = "Page was successfully created."
       redirect_to @page
     else
@@ -64,7 +64,7 @@ class PagesController < ApplicationController
 
   # PATCH/PUT /pages/1
   def update
-    if @page.update(page_params) and attach_blob and new_revision
+    if @page.update(page_params) and new_revision
       flash[:success] = "Page was successfully updated."
       redirect_to @page
     else
@@ -91,17 +91,18 @@ class PagesController < ApplicationController
       params.require(:page).permit(:title, :body)
     end
 
-    def attach_blob
-      if params[:page][:images]
-        @page.images.attach(params[:page][:images])
-        return @page.images.attached?
-      else
-        return true
-      end
-    end
-
     def new_revision
       revision = Revision.create(:page => @page, :title => @page.title, :contents => @page.body, :version => @page.revisions.count + 1, :user => current_user)
-      revision.images.attach(@page.images.map{|image|image.blob})
+
+      if @page.revisions[-2].images.attached?
+        revision.images.attach(@page.revisions[-2].images.map{|image|image.blob})
+      end
+
+      if params[:page][:images]
+        revision.images.attach(params[:page][:images])
+      else
+        true
+      end
+
     end
 end
