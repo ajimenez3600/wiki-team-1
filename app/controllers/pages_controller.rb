@@ -67,8 +67,12 @@ class PagesController < ApplicationController
   # PATCH/PUT /pages/1
   def update
     if @page.update(page_params) and new_revision
-      flash[:success] = "Page was successfully updated."
-      redirect_to @page
+      if @page.comment?
+        flash[:success] = "Comment was successfully updated."
+      else
+        flash[:success] = "Page was successfully updated."
+      end
+      redirect_to @page  
     else
       flash[:danger] = "Failed to update page."
       render 'edit'
@@ -78,11 +82,12 @@ class PagesController < ApplicationController
   # DELETE /pages/1
   def destroy
     @page.destroy
-
-    @path = 'public/images/' + @page.id.to_s + '/'
-    FileUtils.rm_rf(@path);
+    if(@page.file_path)
+      @path = 'public/images/' + @page.id.to_s + '/'
+      FileUtils.rm_rf(@path);
+    end
     flash[:success] = "Page was successfully destroyed."
-    redirect_to pages_url
+    redirect_to @page
   end
 
   private
@@ -93,7 +98,7 @@ class PagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
-      params.require(:page).permit(:title, :body, :locked, :image)
+      params.require(:page).permit(:title, :body, :locked, :image, :comment)
     end
 
     def new_revision

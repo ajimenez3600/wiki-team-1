@@ -7,7 +7,19 @@
     <li class = "list-group-item"> <%= number_to_human_size(File.size(x)) %> </li>
     <% size_array = FastImage.size("public/images/#{@page.id}/#{@page.file_path}") %>
     <li class = "list-group-item"> <%= size_array[0] %> x <%= size_array[1] %> </li>
-    <li class = "list-group-item"> user </li>
-    <li class = "list-group-item"> comment </li>
+    <li class = "list-group-item"> <%= @page.revisions.last.user.username %> </li>
+    <% if @page.comment %>
+    <li class = "list-group-item"> <%= @page.comment %>  </li>
+    <% else %>
+    <li class = "list-group-item"> No comment </li>
+    <% end %>
+    <% if current_user and !@page.locked? %>
+      <li class = "list-group-item">
+        <%= bootstrap_form_for(@page) do |f| %>
+          <%= f.text_area :comment, placeholder: "Update your comment here" %>
+          <%= f.submit "Update comment" %>
+        <% end %>
+    <% end %>
+    </li>
   </ul>
 </div>
