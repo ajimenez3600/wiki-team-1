@@ -33,13 +33,14 @@ class RevisionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def revision_params
-      params.require(:revision).permit(:page_id, :version, :contents, :image)
+      params.require(:revision).permit(:page_id, :version, :contents, :file_path)
     end
 
     # Saves a revision and its attached page
     def save_revision(revision)
       if revision.save
         revision.page.body = revision.contents
+        revision.page.file_path = revision.file_path
         flash[:success] = 'Revision created.'
         redirect_to revision.page and return if revision.page.save
       else

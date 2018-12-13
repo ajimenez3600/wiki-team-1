@@ -110,7 +110,7 @@ class PagesController < ApplicationController
       revision.title = @page.title
       revision.contents = @page.body
       revision.version = @page.revisions.count + 1
-      revision.file_path = @page.image
+      revision.file_path = @page.file_path
       revision.user = current_user
       revision.save
     end

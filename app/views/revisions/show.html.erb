@@ -11,10 +11,9 @@
 </p>
 
 
-<%= image_tag  "/images/#{@revision.page_id}/#{@revision.file_path}" if @revision.file_path? %>
-
 <div class = "jumbotron">
   <%= @revision.contents.html_safe %>
+  <%= link_to image_tag("/images/#{@revision.page.id}/#{@revision.file_path}"), "/pages/#{@revision.page.title}/image" if @revision.file_path%>
 </div>
 
 <%= link_to 'Back', :back, class: 'link-to-color btn' %>
