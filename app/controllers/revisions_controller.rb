@@ -12,9 +12,9 @@ class RevisionsController < ApplicationController
 
   # POST /revisions/1/revert
   def revert
-    page = @revision.page
     new_revision = @revision.dup
-    new_revision.version = page.revisions.last.version + 1
+    new_revision.version = @revision.page.revisions.last.version + 1
+    new_revision.images.attach(@revision.images.map{|image|image.blob})
     save_revision(new_revision)
   end
 
@@ -33,13 +33,16 @@ class RevisionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def revision_params
-      params.require(:revision).permit(:page_id, :version, :contents, :image)
+      params.require(:revision).permit(:page_id, :version, :contents)
     end
 
     # Saves a revision and its attached page
     def save_revision(revision)
       if revision.save
+        revision.page.images.purge
+        revision.page.title = revision.title
         revision.page.body = revision.contents
+        revision.page.images.attach(revision.images.map{|image|image.blob})
         flash[:success] = 'Revision created.'
         redirect_to revision.page and return if revision.page.save
       else

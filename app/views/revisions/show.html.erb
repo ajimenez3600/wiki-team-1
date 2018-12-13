@@ -10,11 +10,11 @@
   <%= @revision.page.created_at %>
 </p>
 
-
-<%= image_tag  "/images/#{@revision.page_id}/#{@revision.file_path}" if @revision.file_path? %>
-
 <div class = "jumbotron">
   <%= @revision.contents.html_safe %>
+  <% @revision.images.each do |image| %>
+    <%= image_tag image %>
+  <% end %>
 </div>
 
 <%= link_to 'Back', :back, class: 'link-to-color btn' %>

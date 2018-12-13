@@ -39,10 +39,6 @@ class PagesController < ApplicationController
   # GET /pages/1/history
   def history
   end
-
-  def image
-    @page = Page.find_by title: params[:title]
-  end
   
   # GET /pages/new
   def new
@@ -52,13 +48,15 @@ class PagesController < ApplicationController
   # GET /pages/1/edit
   def edit
   end
+
   # POST /pages
   def create
-    @page = Page.new(page_params)
-    if @page.save and new_revision
+    @page = Page.create! page_params
+    if attach_blob and new_revision
       flash[:success] = "Page was successfully created."
       redirect_to @page
     else
+      @page.destroy
       flash[:danger] = "Failed to create page."
       render 'new'
     end
@@ -66,7 +64,7 @@ class PagesController < ApplicationController
 
   # PATCH/PUT /pages/1
   def update
-    if @page.update(page_params) and new_revision
+    if @page.update(page_params) and attach_blob and new_revision
       flash[:success] = "Page was successfully updated."
       redirect_to @page
     else
@@ -78,9 +76,6 @@ class PagesController < ApplicationController
   # DELETE /pages/1
   def destroy
     @page.destroy
-
-    @path = 'public/images/' + @page.id.to_s + '/'
-    FileUtils.rm_rf(@path);
     flash[:success] = "Page was successfully destroyed."
     redirect_to pages_url
   end
@@ -93,17 +88,20 @@ class PagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
-      params.require(:page).permit(:title, :body, :locked, :image)
+      params.require(:page).permit(:title, :body)
+    end
+
+    def attach_blob
+      if params[:page][:images]
+        @page.images.attach(params[:page][:images])
+        return @page.images.attached?
+      else
+        return true
+      end
     end
 
     def new_revision
-      revision = Revision.new
-      revision.page = @page
-      revision.title = @page.title
-      revision.contents = @page.body
-      revision.version = @page.revisions.count + 1
-      revision.file_path = @page.image
-      revision.user = current_user
-      revision.save
+      revision = Revision.create(:page => @page, :title => @page.title, :contents => @page.body, :version => @page.revisions.count + 1, :user => current_user)
+      revision.images.attach(@page.images.map{|image|image.blob})
     end
 end
