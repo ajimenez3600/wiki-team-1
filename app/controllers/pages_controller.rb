@@ -39,6 +39,10 @@ class PagesController < ApplicationController
   def history
   end
 
+  def image
+    @page = Page.find_by title: params[:title]
+  end
+  
   # GET /pages/new
   def new
     @page = Page.new
@@ -47,7 +51,6 @@ class PagesController < ApplicationController
   # GET /pages/1/edit
   def edit
   end
-
   # POST /pages
   def create
     @page = Page.new(page_params)

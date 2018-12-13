@@ -4,12 +4,13 @@ Rails.application.routes.draw do
 
   get 'pages/:title/history', :to => 'pages#history'
   post 'pages/:title/lock', :to => 'pages#lock'
+  get 'pages/:title/image', :to => 'pages#image'
   post 'pages/:title/unlock', :to => 'pages#unlock'
   post 'revisions/:id/revert', :to => 'revisions#revert'
 
   devise_for :users
 
-  resources :images
+  
   resources :pages, param: :title
   resources :users, only: [:index, :show]
   resources :revisions, only: [:index, :show, :destroy]

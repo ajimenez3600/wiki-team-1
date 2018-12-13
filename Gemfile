@@ -26,7 +26,8 @@ gem 'devise'
 # Force higher version of Loofah to fix security vulnerability CVE-21018-16468
 gem "loofah", ">=2.2.3"
 
-gem 'carrierwave'
+# Used for image dimensions 
+gem 'fastimage'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

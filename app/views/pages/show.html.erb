@@ -8,7 +8,7 @@
 
 <div class = "jumbotron">
   <p><%= @page.body.html_safe %></p>
-  <%= image_tag  "/images/#{@page.id}/#{@page.file_path}" if @page.file_path? %>
+  <%= link_to image_tag("/images/#{@page.id}/#{@page.file_path}"), "/pages/#{@page.title}/image" %>
 </div>
 
 <% if current_user and current_user.admin? %>
