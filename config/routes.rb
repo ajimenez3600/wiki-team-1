@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   post 'pages/:title/lock', :to => 'pages#lock'
   post 'pages/:title/unlock', :to => 'pages#unlock'
   post 'revisions/:id/revert', :to => 'revisions#revert'
-  get 'pages/:image/:id', :to => 'images#show'
+  get 'pages/:title/image', :to => 'pages#image'
 
   devise_for :users
 

@@ -36,6 +36,9 @@ class PagesController < ApplicationController
     end
   end
 
+  def image 
+    @page = Page.find_by title: params[:title]
+  end
   # GET /pages/1/history
   def history
   end

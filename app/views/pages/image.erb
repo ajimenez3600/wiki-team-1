@@ -1,0 +1,13 @@
+<%= image_tag("/images/#{@page.id}/#{@page.file_path}") %>
+<div class="card">
+  <ul class = "list-group list-group-flush">
+    <li class = "list-group-item"> <%= @page.file_path %> </li>
+    <li class = "list-group-item"> <%= @page.created_at %> </li>
+    <% x = Pathname.new("public/images/#{@page.id}/#{@page.file_path}") %>
+    <li class = "list-group-item"> <%= number_to_human_size(File.size(x)) %> </li>
+    <% size_array = FastImage.size("public/images/#{@page.id}/#{@page.file_path}") %>
+    <li class = "list-group-item"> <%= size_array[0] %> x <%= size_array[1] %> </li>
+    <li class = "list-group-item"> user </li>
+    <li class = "list-group-item"> comment </li>
+  </ul>
+</div>
