@@ -7,10 +7,12 @@ Rails.application.routes.draw do
   get 'pages/:title/image', :to => 'pages#image'
   post 'pages/:title/unlock', :to => 'pages#unlock'
   post 'revisions/:id/revert', :to => 'revisions#revert'
+  get 'pages/:title/image', :to => 'pages#image'
 
   devise_for :users
 
-  
+  resources :images
+  resources :image_comments
   resources :pages, param: :title
   resources :users, only: [:index, :show]
   resources :blacklists, only: [:index, :create, :destroy]
