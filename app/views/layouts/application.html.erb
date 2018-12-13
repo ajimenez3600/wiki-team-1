@@ -46,6 +46,10 @@
               <li><a href="/">Home</a></li>
               <li><a href="/pages">Pages</a></li>
               <li><a href="/revisions">Revisions</a></li>
+              <% if current_user and current_user.admin? %>
+                <li><a href="/users">Users</a></li>
+                <li><a href="/blacklists">Blacklist</a></li>
+              <% end %>
             </ul>
           </div>
      <div class="col-sm-12 main">

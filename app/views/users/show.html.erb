@@ -3,11 +3,18 @@
 </h1>
 
 <div class="jumbotron">
-    <h1 class="display-4"> <%= @user.username %></h1>
+    <h1 class="display-4"><%= @user.username %> (<%= @user.email %>)</h1>
     <hr class = "my-4">
-      <p><%= @user.email %></p>
-      <p><%= @user.admin %></p>
+    <p>User Since <%= @user.created_at %></p>
+    <p><%= pluralize(@user.sign_in_count, "Total Sign In") %></p>
+    <p>Role: <%= @user.admin? ? "Admin" : "Basic User" %></p>
+    <p>Current Sign In At: <%= @user.current_sign_in_at %></p>
+    <p>Current Sign In IP: <%= @user.current_sign_in_ip %></p>
+    <p>Last Sign In At: <%= @user.last_sign_in_at %></p>
+    <p>Last Sign In IP: <%= @user.last_sign_in_ip %></p>
+    </p>    
 </div>
 
-<%= link_to 'Back', users_path, class: 'link-to-color btn' %>
+<%= link_to 'Ban', { controller: "blacklists", action: "create", blacklist: { ip: @user.last_sign_in_ip } }, { method: :post, data: { confirm: 'Are you sure?' }, class: "btn link-to-color" } %>
+<%= link_to 'Back', '/blacklists', class: 'btn link-to-color' %>
 

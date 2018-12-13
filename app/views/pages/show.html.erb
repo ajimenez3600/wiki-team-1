@@ -1,4 +1,7 @@
-<h1><%= @page.title %></h1>
+<h1>
+  <% if @page.locked %>🔒<% end %>
+  <%= @page.title %>
+</h1>
 
 <% if @page.locked? %>
   <div class="alert alert-warning">
@@ -10,6 +13,9 @@
   <p><%= @page.body.html_safe %></p>
   <%= link_to image_tag("/images/#{@page.id}/#{@page.file_path}"), "/pages/#{@page.title}/image" %>
 </div>
+<div class="pull-right">
+  <em>Last edited by <%= @page.revisions.last.user.username %> at <%= @page.revisions.last.created_at %></em>
+</div>
 
 <% if current_user and current_user.admin? %>
   <% if @page.locked? %>
@@ -19,8 +25,8 @@
   <% end %>
 <% end %>
 
-<% if current_user and !@page.locked? %>
+<% if current_user and (!current_user.banned? || current_user.admin?) and !@page.locked? %>
   <%= link_to 'Edit', edit_page_path(@page), class: 'link-to-color btn' %>
 <% end %>
 <%= link_to 'History', "/pages/#{@page.title}/history", class: 'link-to-color btn' %> 
-<%= link_to 'Back', pages_path, class: 'link-to-color btn' %>
+<%= link_to 'Back', :back, class: 'link-to-color btn' %>

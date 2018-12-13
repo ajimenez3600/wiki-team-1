@@ -3,17 +3,19 @@
   <thead>
       <tr>
         <th>Title</th>
-        <th colspan="6"></th>
+        <th>Last Editor</th>
+        <th>Last Edited</th>
       </tr>
     </thead>
   <tbody>
     <% @pages.each do |page| %>
       <tr>
-        <td><%= page.title %></td>
-        <td><%= link_to 'Show', page %></td>
-        <% if current_user and !page.locked %>
+        <td><%= "🔒" if page.locked? %><%= link_to page.title, page %></td>
+        <td><%= page.revisions.last.user.username %></td>
+        <td><%= page.revisions.last.created_at %></td>
+        <td><%= link_to 'History', "/pages/#{page.title}/history" %></td>
+        <% if current_user and (!current_user.banned? || current_user.admin?) and !page.locked %>
           <td><%= link_to 'Edit', edit_page_path(page) %></td>
-          <td><%= link_to 'History', "/pages/#{page.title}/history" %></td>
           <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
@@ -23,4 +25,6 @@
 
 <br>
 
-<%= link_to 'Create new article', new_page_path, class: 'link-to-color btn' %>
+<% if current_user %>
+  <%= link_to 'Create new article', new_page_path, class: 'link-to-color btn' %>
+<% end %>

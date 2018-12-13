@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   
   resources :pages, param: :title
   resources :users, only: [:index, :show]
+  resources :blacklists, only: [:index, :create, :destroy]
   resources :revisions, only: [:index, :show, :destroy]
 end
