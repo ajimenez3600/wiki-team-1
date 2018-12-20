@@ -10,9 +10,9 @@
 <% end %>
 
 <div class = "jumbotron">
-  <p><%= @page.body.html_safe %></p>
-  <% @page.revisions.last.images.each do |image| %>
-    <%= image_tag image %>
+  <p><%= @page.revisions.last.contents.html_safe %></p>
+  <% @page.revisions.last.images.each_with_index do |image, index| %>
+    <%= link_to image_tag(image), "/pages/#{@page.title}/images/#{index}" %>
   <% end %>
 </div>
 <div class="pull-right">

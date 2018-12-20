@@ -35,7 +35,7 @@ RSpec.describe RevisionsController, type: :controller do
                 expect(response).to be_redirect
             }.to change { @page.revisions.count }.by 1
             expect(@page.title).to eq 'Title'
-            expect(@page.body).to eq 'Body'
+            expect(@page.revisions.last.contents).to eq 'Body'
         end
     end
 

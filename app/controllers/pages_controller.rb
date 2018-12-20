@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   include VerificationConcern
-  before_action :set_page, only: [:show, :lock, :unlock, :history, :edit, :update, :destroy]
+  before_action :set_page, only: [:show, :image, :lock, :unlock, :history, :edit, :update, :destroy]
   before_action :confirm_authenticated, only: [:new, :create, :edit, :update]
   before_action :confirm_admin, only: [:lock, :unlock, :delete]
 
@@ -16,6 +16,10 @@ class PagesController < ApplicationController
   # GET /pages/1
   def show
     redirect_to '/404' if @page.nil?
+  end
+
+  def image
+    @image = @page.revisions.last.images[Integer(params[:id])]
   end
 
   def lock
@@ -51,8 +55,8 @@ class PagesController < ApplicationController
 
   # POST /pages
   def create
-    @page = Page.create! page_params
-    if new_revision
+    @page = Page.new page_params
+    if @page.save and new_revision
       flash[:success] = "Page was successfully created."
       redirect_to @page
     else
@@ -92,13 +96,18 @@ class PagesController < ApplicationController
     end
 
     def new_revision
-      revision = Revision.create(:page => @page, :title => @page.title, :contents => @page.body, :version => @page.revisions.count + 1, :user => current_user)
+      last = @page.revisions.last
+      revision = Revision.create(:page => @page, :title => @page.title, :contents => params[:page][:body], :version => @page.revisions.count + 1, :user => current_user)
 
-      if @page.revisions[-2].images.attached?
-        revision.images.attach(@page.revisions[-2].images.map{|image|image.blob})
+      if last and last.images.attached?
+        revision.images.attach(last.images.map{|image|image.blob})
       end
 
       if params[:page][:images]
+        params[:page][:images].each do |image|
+          image[:uploader] = current_user.username
+          image[:comments] = ''
+        end
         revision.images.attach(params[:page][:images])
       else
         true

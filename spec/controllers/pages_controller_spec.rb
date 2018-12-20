@@ -34,7 +34,7 @@ RSpec.describe PagesController, type: :controller do
 
             page = Page.last
             expect(page.title).to eq 'NewTitle'
-            expect(page.body).to eq 'Body'
+            expect(page.revisions.last.contents).to eq 'Body'
             expect(page.revisions.count).to eq 1
             expect(page.revisions.last.title).to eq 'NewTitle'
         end
@@ -80,14 +80,9 @@ RSpec.describe PagesController, type: :controller do
 
             page = Page.find(@page.id)
             expect(page.title).to eq 'Title2'
-            expect(page.body).to eq 'Body2' 
+            expect(page.revisions.last.contents).to eq 'Body2' 
             expect(page.revisions.last.title).to eq 'Title2'
             expect(page.revisions.last.contents).to eq 'Body2'
-        end
-        it 'should fail to update the page' do
-            patch :update, params: { title: @page.title, page: { body: 'Fail' } }
-            expect(response).to be_redirect
-            expect(@page.body).not_to eq 'Fail'
         end
     end
 

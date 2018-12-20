@@ -40,7 +40,6 @@ class RevisionsController < ApplicationController
     def save_revision(revision)
       if revision.save
         revision.page.title = revision.title
-        revision.page.body = revision.contents
         flash[:success] = 'Revision created.'
         redirect_to revision.page and return if revision.page.save
       else
